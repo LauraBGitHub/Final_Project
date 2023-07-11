@@ -1,0 +1,52 @@
+<%- include partials/header.ejs %>
+
+<link rel="stylesheet" href="/stylesheets/style.css" />
+
+
+
+
+ 
+<div class="container text-light" id="indexDiv">
+
+  <div class="row"> 
+    <h2 Style="font-weight: lighter;">TURTLE   </h2> <h2 Style="font-weight: bolder";>TRADING BOT </h2>
+    </div> 
+    <div class="row"> 
+    <p style="margin-left: 30px; "> Automate Decentralised crypto trading </p>
+  </div>
+  
+      <div> <a class="navbar-brand" href="#">
+        <img src="/images/headerImg.png"  style="width: 100%; height: 100%;" alt="header" /> </a> 
+      </div>
+   
+  
+  <br> <br> 
+  
+  <div class="row"> 
+
+    <div class="col" id="indexFunc"> 
+    <h3> MATIC  </h3> 
+    <p > Deposit Tokens </p>
+    <p style="text-align: left;"> Wallet Amount (MATIC) :  </p>
+      <div id="userArea"> 
+        <a class="btn btn-success"  onclick="">DEPOSIT</a>
+      </div> 
+    </div> 
+
+    <div class="col" id="indexFunc"> 
+    <h3> MATIC / USDC  </h3> 
+    <p > Withdraw tokens </p>
+    <p style="text-align: left;"> Stored in Vault (MATIC) :  &emsp; &emsp; &emsp;<%= title %></p>
+    <p style="text-align: left;"> Stored in Vault (USDC) :  </p>
+     <div id="userArea"> 
+        <a class="btn btn-success" onclick="">WITHDRAW</a>
+     </div> 
+    </div> 
+  </div> 
+
+</div>
+
+<script src="https://unpkg.com/simplebar@5.3.5/dist/simplebar.min.js"></script>
+
+
+<%- include partials/footer.ejs %>

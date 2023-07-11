@@ -1,0 +1,156 @@
+<%- include partials/header.ejs %>
+<link rel="stylesheet" href="/stylesheets/style.css" />
+<script src="/public/javascripts/script.js"> </script> 
+<div class= "contain"> 
+  <div id="saveBotDiv" > 
+    <h5 style="text-align: center;"> Customise Strategy </h5> 
+    <p class="small">BaseOrder</p> 
+    <div class="input-group "> 
+      <input type="text" class="form-control custom-input col-md-8" id="WalletInp" 
+      placeholder="" value=" " maxlength="6" required="">
+      <span class="input-group-text text-sm col-md-4">USDC</span>
+    </div> 
+    <br> 
+    <p class="small">Safety Order Size</p> 
+    
+    <div class="input-group"> 
+      <input type="text" class="form-control custom-input col-md-8" id="WalletInp" 
+      placeholder="" value=" " maxlength="6" required="">
+      <span class="input-group-text text-sm col-md-4">USDC</span>
+    </div> 
+    <br> 
+    <div class="row"> 
+       
+      <div class="slider col-md-10"> 
+        <p class="small"> Max safety trades count: </p>
+        <input type="range" class="form-control-range " min="0" max="100" step="1" value="0" id="Slider01">
+        
+      </div> 
+      
+      <div class="d-flex justify-content-between align-items-center col-md-2">
+        <input type="text" class="form-control " id="txtInput01" placeholder="" value="" maxlength="3" required="">                                   
+      </div>
+
+    </div> 
+    <br> 
+    <div class="row"> 
+       
+      <div class="slider col-md-10"> 
+        <p class="small"> Price Deviation: </p>
+        <input type="range" class="form-control-range " min="0" max="100" step="1" value="0" id="Slider">
+        
+      </div> 
+      
+      <div class="d-flex justify-content-between align-items-center col-md-2">
+        <input type="text" class="form-control " id="txtInput" placeholder="" value="" maxlength="3" required="">     
+        <span class="input-group-text">%</span>                              
+      </div>
+
+    </div> 
+    <br> 
+    <div class="row"> 
+       
+      <div class="slider col-md-10"> 
+        <p class="small"> Safety order volume scale: </p>
+        <input type="range" class="form-control-range " min="0" max="100" step="1" value="0" id="Slider">
+        
+      </div> 
+      
+      <div class="d-flex justify-content-between align-items-center col-md-2">
+        <input type="text" class="form-control " id="txtInput" placeholder="" value="" maxlength="3" required="">                          
+      </div>
+
+    </div> 
+    <br> 
+    <div class="row"> 
+       
+      <div class="slider col-md-10"> 
+        <p class="small"> Safety order step scale: </p>
+        <input type="range" class="form-control-range " min="0" max="100" step="1" value="0" id="Slider">
+      </div> 
+      
+      <div class="d-flex justify-content-between align-items-center col-md-2">
+        <input type="text" class="form-control " id="txtInput" placeholder="" value="" maxlength="3" required="">     
+                                 
+      </div>
+
+    </div> 
+    <div class="row"> 
+       
+      <div class="slider col-md-10"> 
+        <p class="small"> Profit Take Price  </p>
+        <input type="range" class="form-control-range " min="0" max="100" step="1" value="0" id="Slider">
+        
+      </div> 
+      
+      <div class="d-flex justify-content-between align-items-center col-md-2">
+        <input type="text" class="form-control " id="txtInput" placeholder="" value="" maxlength="3" required="">                          
+      </div>
+
+    </div> 
+    <br> 
+    <div id="buttonTrade"> 
+      <a class="btn btn-success"  onclick="">SAVE BOT </a>
+    </div> 
+
+  </div> 
+
+
+
+  <div id="deployDiv"> 
+    <h5 style="text-align: center;"> Deploy Strategy </h5> 
+    <p>Vault Amount  </p> 
+    <p> Max. deal volume: </p> 
+    <p> Minimum Wallet Balance </p> 
+    <br> 
+    <div id="buttonTrade"> 
+      <a class="btn btn-success"  onclick="">DEPLOY</a>
+    </div> 
+  
+  </div> 
+
+
+
+
+
+
+
+
+
+  <div class="container" >
+  <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Size</th>
+          <th scope="col">Deviation</th>
+          <th scope="col">Volume</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Base</th>
+          <td>10 </td>
+          <td>0.00%</td>
+          <td>10 </td>
+        </tr>
+        <tr>
+          <th scope="row">SO 1 </th>
+          <td>5</td>
+          <td>-1.00%</td>
+          <td>15 </td>
+        </tr>
+        <tr>
+          <th scope="row">SO 2 </th>
+          <td>10</td>
+          <td>-2.00%</td>
+          <td>15 </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> 
+  <br> 
+
+
+<%- include partials/footer.ejs %>

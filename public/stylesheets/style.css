@@ -1,0 +1,89 @@
+body {
+  padding: 50px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0px;
+  background-image: url("/images/background.png");
+  background-color: rgb(53, 58, 64);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top right;
+  overflow-y: scroll;
+
+}
+
+
+#indexDiv{ 
+  margin-top: 100px;
+ font-family: "Open Sans", sans-serif;
+ /*top: 150px;*/ 
+ 
+}
+.nav-item{
+
+  font-weight: bold;
+  text-decoration: none;
+  color: #9E8C80;
+  padding: 1vw;
+  font-size: 15px; 
+}
+#readArea{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder; 
+  padding: 1vw; 
+}
+h2{ 
+  display: inline-block;
+  padding-right: 15px;
+}
+#indexFunc{ 
+  background-color: rgb(53, 58, 64);
+  opacity: 90%; 
+  border: 1px solid; 
+  border-radius: 30px; 
+  text-align: center;
+  
+
+}
+#userArea{ 
+  padding: 10px; 
+  display: flex;
+  justify-content: center;
+}
+#buttonTrade{  
+  padding: 10px; 
+  display: flex;
+  justify-content: right;
+}
+#saveBotDiv , #deployDiv { 
+  background-color: rgb(53, 58, 64);
+  opacity: 90%; 
+  border: 1px solid; 
+  border-radius: 30px; 
+  flex: 1 1 50%;
+  min-width: 0;
+  padding: 10px;
+  color: white; 
+  width: calc(100% - 20px);
+  height: calc(50% - 20px);
+  
+}
+.contain{ 
+  margin-top: 150px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.container{  
+  margin-top: 10px;
+  flex-basis: 100%;
+}
+
+.custom-input{
+  width: 1vw; 
+}
+
+p{ 
+  margin-left: 10px; 
+}
+.input-group {
+  width: 250px; 
+}
