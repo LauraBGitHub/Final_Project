@@ -1,4 +1,18 @@
+  function table(){ 
+    var rows = parseInt(document.getElementById('Slider01').value); 
+    var table = document.getElementById("Table");
+    for (var i = 1; i < rows; i++) {
+      var row = table.insertRow(i);
+      var orderCell = row.insertCell(0);
+      var amountCell = row.insertCell(1);
+      var totalCell = row.insertCell(2);
 
+      orderCell.innerHTML = "Order " + i;
+      amountCell.innerHTML = "<input type='number' id='amount_" + i + "' onchange='calculateTotal(" + i + ")'>";
+      totalCell.innerHTML = "<span id='total_" + i + "'></span>";
+    }
+  }
+  
   function balance() {
     var baseOrder = parseFloat(document.getElementById('baseOrder').value);
     var safetyOrder = parseFloat(document.getElementById('safetyOrder').value);
