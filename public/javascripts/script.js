@@ -1,4 +1,20 @@
 
+  function balance() {
+    var baseOrder = parseFloat(document.getElementById('baseOrder').value);
+    var safetyOrder = parseFloat(document.getElementById('safetyOrder').value);
+    var safetyCount = parseFloat(document.getElementById('Slider01').value);
+    var safetyVolume = parseFloat(document.getElementById('Slider03').value);
+    
+    var minBalance = baseOrder + safetyOrder;
+    
+    
+    for (let i = 2; i <= safetyCount; i++) {
+      let temp = safetyOrder * safetyVolume;
+      minBalance += temp;
+          }
+    
+    document.getElementById('minBalance').textContent = minBalance.toFixed(2);
+  }
 
   function updateSliderValue() {
     var sliderValue = document.getElementById('Slider01').value;

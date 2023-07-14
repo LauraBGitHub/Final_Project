@@ -46,6 +46,7 @@
     </nav>
     
     <script>
+      
       let account;
       const connectMetamask = async () => {
         if (window.ethereum !== "undefined") {
@@ -54,6 +55,15 @@
           document.getElementById("userArea").innerHTML = `Connected:<br>${account}`;
         }
       }
+      const web3 = new Web3(window.ethereum);
+      web3.eth.getAccounts().then(accounts => {
+        const address = accounts[0];
+        const tokenContract = new web3.eth.Contract(abi, 0xCC42724C6683B7E57334c4E856f4c9965ED682bD);
+        tokenContract.methods.balanceOf(address).call().then(balance => {
+          console.log("MATIC Balance:", balance);
+        });
+      });
+
     </script>
 
   <body> 

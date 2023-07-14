@@ -7,16 +7,16 @@
     <h5 style="text-align: center;"> Customise Strategy </h5> 
     <p class="small">BaseOrder</p> 
     <div class="input-group "> 
-      <input type="text" class="form-control custom-input col-md-8" id="WalletInp" 
-      placeholder="" value=" " maxlength="6" required="">
+      <input type="text" class="form-control custom-input col-md-8" id="baseOrder" 
+      placeholder="" value="0" maxlength="6" required="">
       <span class="input-group-text text-sm col-md-4">USDC</span>
     </div> 
     <br> 
     <p class="small">Safety Order Size</p> 
     
     <div class="input-group"> 
-      <input type="text" class="form-control custom-input col-md-8" id="WalletInp" 
-      placeholder="" value=" " maxlength="6" required="">
+      <input type="text" class="form-control custom-input col-md-8" id="safetyOrder" 
+      placeholder="" value="0" maxlength="6" required="">
       <span class="input-group-text text-sm col-md-4">USDC</span>
     </div> 
     <br> 
@@ -59,7 +59,7 @@
        
       <div class="slider col-md-10"> 
         <p class="small"> Safety order volume scale: </p>
-        <input type="range" class="form-control-range " min="0" max="50" step="1" value="0" 
+        <input type="range" class="form-control-range " min="0.1" max="5" step="0.01" value="0" 
         onChange="updateSliderValue()" id="Slider03">
         
       </div> 
@@ -75,7 +75,7 @@
        
       <div class="slider col-md-10"> 
         <p class="small"> Safety order step scale: </p>
-        <input type="range" class="form-control-range " min="0" max="50" step="1" value="0"
+        <input type="range" class="form-control-range " min="0.1" max="5" step="0.01" value="0"
         onChange="updateSliderValue()" id="Slider04">
       </div> 
       
@@ -103,7 +103,7 @@
     </div> 
     <br> 
     <div id="buttonTrade"> 
-      <a class="btn btn-success"  onclick="">SAVE BOT </a>
+      <a class="btn btn-success"  onclick="balance()">SAVE BOT </a>
     </div> 
 
   </div> 
@@ -112,12 +112,12 @@
 
   <div id="deployDiv"> 
     <h5 style="text-align: center;"> Deploy Strategy </h5> 
-    <p>Vault Amount  </p> 
+    <p>Vault Amount:  </p> 
     <p> Max. deal volume: </p> 
-    <p> Minimum Wallet Balance </p> 
+    <p> Minimum Wallet Balance:  <span class="input-group-text" id="minBalance"></span></p> 
     <br> 
     <div id="buttonTrade"> 
-      <a class="btn btn-success"  onclick="">DEPLOY</a>
+      <a class="btn btn-success"  >DEPLOY</a>
     </div> 
   
   </div> 
