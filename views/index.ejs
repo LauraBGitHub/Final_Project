@@ -13,7 +13,7 @@
 
 <script src="https://unpkg.com/simplebar@5.3.5/dist/simplebar.min.js"></script>
 
-<body onload="connectContract()"> 
+<body onload="loadFunctions()"> 
  
 <div class="container text-light" id="indexDiv">
 
@@ -41,11 +41,11 @@
       <p class="small"style="text-align: left;"> Contract : 
         <span class="input-group-text" id="contract"></span></p>
       <p class="small"style="text-align: left;"> Wallet Amount (MATIC) : 
-        <span class="input-group-text" id="balance"></span>  </p>
+        <span class="input-group-text" id=""></span>  </p>
         
       <div>  
-        <p style="text-align: left;"class="small"> Deposit Amount: </p>
-        <input style="width: 100px; margin-left: 45px; "type="text" class="form-control " id="deposit"  value="" maxlength="3">  
+        <p class="small"> Deposit Amount: </p>
+        <input style="width: 100px;  "type="number"  id="deposit"  maxlength="3">  
       </div>
 
       <div id="userArea"> 
@@ -54,13 +54,32 @@
     </div> 
 
     <div class="col" id="indexFunc"> 
-    <h3> MATIC / USDC  </h3> 
-    <p > Withdraw tokens </p>
-    <p style="text-align: left;"> Stored in Vault (MATIC) :  &emsp; &emsp; &emsp;<%= title %></p>
-    <p style="text-align: left;"> Stored in Vault (USDC) :  </p>
-     <div id="userArea"> 
-        <a class="btn btn-success" onclick="">WITHDRAW</a>
-     </div> 
+      <h3> MATIC / USDC  </h3> 
+      <p > Withdraw tokens </p>
+      <p class="small"style="text-align: left;"> Stored in Vault Balance :<span class="input-group-text" id="balance"></span>  </p>
+      <p class="small"style="text-align: left;"> Stored in Vault (USDC) :  </p>
+      
+      
+        
+          <p class="small"style="text-align: left;"> Withdraw Amount: </p>
+        
+        
+          <input style="width: 100px; margin-left: 20px;  "type="number" id="amount"  maxlength="3"class="form-control" > 
+        
+      
+      
+        
+          <p class="small"style="text-align: left; margin-top: 20px; "> Account to withdraw to: </p>
+        
+      
+          <input style=" margin-left: 20px; width: 80%;"type="text"class="form-control"  id="addressInput" placeholder="Enter Address"> <br>
+        
+      
+      
+      <div class = "row"id="userArea"> 
+          <a class="btn btn-success" onclick="withdraw()">WITHDRAW</a>
+      </div> 
+      
     </div> 
   </div> 
 

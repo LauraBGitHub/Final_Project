@@ -18,7 +18,7 @@ connectMetamask().then(() => {
 }).catch((error) => {
   console.log(error);
 })
-const balanceLoad = async (account) => {
+/*const balanceLoad = async (account) => {
     const abi = [
         {
           "constant": true,
@@ -442,10 +442,14 @@ const balanceLoad = async (account) => {
   } catch (error) {
     console.log(error);
   }
-};
+};*/ 
+async function loadFunctions() {
+  await connectContract();
+  getBalance();
+}
 
 const connectContract = async () => {
-  console.log("working ish"); 
+  console.log("Connecting Contract"); 
   const ABI = [
     {
       "inputs": [],
@@ -505,7 +509,21 @@ const connectContract = async () => {
   window.contract = await new window.web3.eth.Contract(ABI, Address);
   document.getElementById("contract").innerHTML =  `${Address}`// calling the elementID above""
 }
+const getBalance = async () => { 
+  console.log("Getting Balance:  "); 
+  const data = await window.contract.methods.getBalance().call();
+  document.getElementById("balance").innerHTML = `${data}`;
+}
+/* from acount to contract here */
 const depositContract = async () => {
   const amount = document.getElementById("deposit").value;
   await window.contract.methods.deposit().send({from: account, value: amount});
+  console.log("Deposited:  " +amount); 
+}
+const withdraw = async () => {
+  const withdrawAmount = document.getElementById("amount").value;
+  console.log("Amount " + withdrawAmount ); 
+  const address = document.getElementById("addressInput").value;
+  console.log("Address " + address ); 
+  await window.contract.methods.withdraw(address, withdrawAmount).send({from: account});
 }
