@@ -1,3 +1,4 @@
+  
   function table(){ 
     var rows = parseInt(document.getElementById('Slider01').value); 
     var table = document.getElementById("Table");
@@ -54,3 +55,6 @@
     var textInputValue = document.getElementById('txtInput05').value;
     document.getElementById('Slider05').value = textInputValue;
   }
+
+
+
