@@ -1,4 +1,3 @@
-
 let account;
 const connectMetamask = async () => {
   if (window.ethereum !== undefined) {
@@ -445,4 +444,68 @@ const balanceLoad = async (account) => {
   }
 };
 
+const connectContract = async () => {
+  console.log("working ish"); 
+  const ABI = [
+    {
+      "inputs": [],
+      "name": "deposit",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address payable",
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdraw",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getBalance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]; 
 
+  const Address = "0xdCcF60EA09e8619DA834A376Dd93f764874A69D7"; 
+  window.web3 = await new Web3(window.ethereum);
+  window.contract = await new window.web3.eth.Contract(ABI, Address);
+  document.getElementById("contract").innerHTML =  `${Address}`// calling the elementID above""
+}
+const depositContract = async () => {
+  const amount = document.getElementById("deposit").value;
+  await window.contract.methods.deposit().send({from: account, value: amount});
+}

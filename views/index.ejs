@@ -13,7 +13,7 @@
 
 <script src="https://unpkg.com/simplebar@5.3.5/dist/simplebar.min.js"></script>
 
-<body > 
+<body onload="connectContract()"> 
  
 <div class="container text-light" id="indexDiv">
 
@@ -34,14 +34,22 @@
   <div class="row"> 
 
     <div class="col" id="indexFunc"> 
-    <h3> MATIC  </h3> 
-    <p > Deposit Tokens </p>
-    <p style="text-align: left;"> Wallet : 
-      <span class="input-group-text" id="address"></span></p>
-    <p style="text-align: left;"> Wallet Amount (MATIC) : 
-      <span class="input-group-text" id="balance"></span>  </p>
+      <h3> MATIC  </h3> 
+      <p > Deposit Tokens </p>
+      <p class="small"style="text-align: left;"> Wallet : 
+        <span class="input-group-text" id="address"></span></p>
+      <p class="small"style="text-align: left;"> Contract : 
+        <span class="input-group-text" id="contract"></span></p>
+      <p class="small"style="text-align: left;"> Wallet Amount (MATIC) : 
+        <span class="input-group-text" id="balance"></span>  </p>
+        
+      <div>  
+        <p style="text-align: left;"class="small"> Deposit Amount: </p>
+        <input style="width: 100px; margin-left: 45px; "type="text" class="form-control " id="deposit"  value="" maxlength="3">  
+      </div>
+
       <div id="userArea"> 
-        <a class="btn btn-success" onclick="balanceLoad()">DEPOSIT</a>
+        <a class="btn btn-success" onclick="depositContract()">DEPOSIT</a>
       </div> 
     </div> 
 
