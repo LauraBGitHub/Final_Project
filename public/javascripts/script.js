@@ -55,7 +55,11 @@
     var textInputValue = document.getElementById('txtInput05').value;
     document.getElementById('Slider05').value = textInputValue;
   }
-
+  async function loadDeployment() {
+    await connectTradingContract();
+    createBot();
+  }
+  
   const connectTradingContract = async () => {
     console.log("Connecting Trading Contract"); 
     const ABI = [
@@ -177,4 +181,26 @@
     window.contract = await new window.web3.eth.Contract(ABI, Address);
     
   }
+  async function createBot() {
+    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    const account = accounts[0]; // The user's Ethereum account
+    console.log('Account:  ', account);
+    var priceDeviation = document.getElementById('txtInput02').value;
+    console.log('PD:  ', priceDeviation);
+    var stepScale = document.getElementById('txtInput04').value;
+    console.log('SS:  ', stepScale);
+    var profitPrice = document.getElementById('txtInput05').value;
+    console.log('PP:  ', profitPrice);
+    // Call the createBot function
+    const botId = await contract.methods.createBot(
+      baseOrder, 
+      safetyOrder, 
+      safetyCount, 
+      safetyVolume, 
+      priceDeviation, 
+      stepScale, 
+      profitPrice
+      ).send({ from: account });
 
+    console.log('New bot created with ID:', botId);
+}
