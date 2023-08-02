@@ -2,11 +2,22 @@ let account;
 const connectMetamask = async () => {
   if (window.ethereum !== undefined) {
     try {
-      const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-      account = accounts[0];
-      document.getElementById("userArea").innerHTML = `Connected`;
-      document.getElementById("address").innerHTML = account;
-    
+      // CHANGE 01 - Changing chain from Sepolia to Polygon 
+      const chainId = "0x13881";
+      
+      const chainData = await ethereum.request({ method: "eth_chainId" });
+      if (chainData === chainId) {
+        const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+        account = accounts[0];
+        document.getElementById("userArea").innerHTML = `Connected`;
+        document.getElementById("address").innerHTML = account;
+      } else {
+        await ethereum.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId }],
+        });
+
+      } 
     } catch (error) {
       console.log(error);
     }
