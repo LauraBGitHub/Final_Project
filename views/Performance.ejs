@@ -1,2 +1,12 @@
 <%- include partials/header.ejs %>
 <link rel="stylesheet" href="/stylesheets/style.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.3.4/dist/web3.min.js"></script>
+<script src="/javascripts/script03.js"></script>
+
+<body onload="loadChart()">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <canvas id="myChart" style="background-color: #f9f9f9;"></canvas>
+    </div>
+    
+</body>

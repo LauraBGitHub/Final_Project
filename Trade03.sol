@@ -1,8 +1,4 @@
-// SPDX-License-Identifier: GPL-2.0-or-later
-pragma solidity =0.7.6;
-pragma abicoder v2;
-
-import "https://github.com/Uniswap/v3-periphery/blob/main/contracts/interfaces/ISwapRouter.sol";
+pragma solidity ^0.8.17;
 
 interface IERC20{ 
     function approve(address spender, uint256 amount) external returns (bool);
@@ -12,15 +8,15 @@ interface IERC20{
     
 }
 contract Trade02 {
-    
+    address private constant UNISWAP_V2_ROUTER = 
     address public constant routerAddress= 0xE592427A0AEce92De3Edee1F18E0157C05861564; 
     ISwapRouter public immutable swapRouter = ISwapRouter(routerAddress);
 
 
-    address public constant MATIC = 0xF805AB418257291580898b00D4F9Ae4F94489ddc;
+    address public constant WMATIC = 0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889;
     address public constant WETH = 0xA6FA4fB5f76172d178d61B04b0ecd319C5d1C0aa;
 
-    IERC20 public wrapMatic = IERC20(MATIC); 
+    IERC20 public wrapMatic = IERC20(WMATIC); 
 
     // we will set the pool fee to 0.3%.
     uint24 public constant poolFee = 3000;
@@ -29,16 +25,16 @@ contract Trade02 {
 
     function swapExactInputSingle(uint256 amountIn) external returns (uint256 amountOut) {
        
-        //wrapMatic.safeTransferFrom(MATIC, msg.sender, address(this), amountIn);
+        //wrapMatic.safeTransferFrom(WMATIC, msg.sender, address(this), amountIn);
 
-        // Approve the router to spend MATIC.
+        // Approve the router to spend WMATIC.
         wrapMatic.approve(address(swapRouter), amountIn);
 
         // Naively set amountOutMinimum to 0. In production, use an oracle or other data source to choose a safer value for amountOutMinimum.
         // We also set the sqrtPriceLimitx96 to be 0 to ensure we swap our exact input amount.
         ISwapRouter.ExactInputSingleParams memory params =
             ISwapRouter.ExactInputSingleParams({
-                tokenIn: MATIC,
+                tokenIn: WMATIC,
                 tokenOut: WETH,
                 fee: poolFee,
                 recipient: address(this),
@@ -54,13 +50,13 @@ contract Trade02 {
 
     
     function swapExactOutputSingle(uint256 amountOut, uint256 amountInMaximum) external returns (uint256 amountIn) {
-        // Approve the router to spend the specifed `amountInMaximum` of MATIC.
+        // Approve the router to spend the specifed `amountInMaximum` of WMATIC.
         
         wrapMatic.approve( address(swapRouter), amountInMaximum);
 
         ISwapRouter.ExactOutputSingleParams memory params =
             ISwapRouter.ExactOutputSingleParams({
-                tokenIn: MATIC,
+                tokenIn: WMATIC,
                 tokenOut: WETH,
                 fee: poolFee,
                 recipient: address(this),
@@ -77,7 +73,7 @@ contract Trade02 {
         // If the actual amount spent (amountIn) is less than the specified maximum amount, we must refund the msg.sender and approve the swapRouter to spend 0.
         if (amountIn < amountInMaximum) {
             wrapMatic.approve(address(swapRouter), 0);
-            wrapMatic.transfer(address(this), amountInMaximum - amountIn);
+            wrapMatic.Transfer(address(this), amountInMaximum - amountIn);
         }
     }
 }
