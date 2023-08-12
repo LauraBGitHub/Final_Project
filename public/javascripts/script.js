@@ -1,4 +1,4 @@
-  
+ 
   function table(){ 
     var rows = parseInt(document.getElementById('Slider01').value); 
     var table = document.getElementById("Table");

@@ -32,6 +32,11 @@ connectMetamask().then(() => {
 
 async function loadFunctions() {
   await connectContract();
+  getBalance(); 
+  getMaticBalance(); 
+}
+async function deposit() {
+  await depositContract();
   getBalance();
 }
 
@@ -39,51 +44,7 @@ const connectContract = async () => {
   console.log("Connecting Contract"); 
   const ABI = [
     {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "user",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "amount",
-          "type": "uint256"
-        }
-      ],
-      "name": "Deposited",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "user",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "amount",
-          "type": "uint256"
-        }
-      ],
-      "name": "Withdrawn",
-      "type": "event"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "amount",
-          "type": "uint256"
-        }
-      ],
+      "inputs": [],
       "name": "depositToken",
       "outputs": [],
       "stateMutability": "payable",
@@ -106,11 +67,6 @@ const connectContract = async () => {
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
-    },
-    {
-      "inputs": [],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
     },
     {
       "inputs": [],
@@ -137,36 +93,10 @@ const connectContract = async () => {
       ],
       "stateMutability": "view",
       "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "MATIC",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "owner",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
     }
   ]; 
                          
-  const Address = "0xd5df569E63fAb3F0E32d9209Fe71e71b870a58Ea"; 
+  const Address = "0x6b2d04Df0a7F490d412aeFDa0f57fC44Fc6699f7"; 
   window.web3 = await new Web3(window.ethereum);
   window.contract = await new window.web3.eth.Contract(ABI, Address);
   document.getElementById("contract").innerHTML =  `${Address}`// calling the elementID above""
@@ -189,3 +119,33 @@ const withdraw = async () => {
   console.log("Address " + address ); 
   await window.contract.methods.withdraw(address, withdrawAmount).send({from: account});
 }
+
+const maticAddress = "0xF805AB418257291580898b00D4F9Ae4F94489ddc"; 
+
+async function getMaticBalance() {
+  const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+  const userAddress = accounts[0]; 
+  console.log("Account :  "+ userAddress); 
+  try {
+    const data = web3.eth.abi.encodeFunctionCall(
+      {
+        name: 'balanceOf',
+        type: 'function',
+        inputs: [{ type: 'address', name: 'account' }],
+      },
+      [userAddress]
+    );
+
+    const result = await web3.eth.call({
+      to: maticAddress,
+      data: data,
+    });
+
+    const tokenBalance = web3.utils.hexToNumberString(result);
+    console.log(`Token Balance: ${tokenBalance}`);
+    document.getElementById('matic').innerHTML = tokenBalance;
+  } catch (error) {
+    console.error('Error fetching token balance:', error);
+  }
+
+ } 

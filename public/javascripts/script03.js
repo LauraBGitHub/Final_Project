@@ -695,31 +695,50 @@ const oracleABI = [
   
 const oracleContract = new web3.eth.Contract(oracleABI, oracleAddress);  
 
+let chartInstance;
+let historicalData = [];
+//my code was breaking like crazy so this listener will make sure the dom actually loads before it executes my functions 
+document.addEventListener('DOMContentLoaded', function() {
+    loadChart();
+});
+// Function to get Latest data from chainlink API 
 async function fetchLatestData() {
-    try{
+    try {
         const latestData = await oracleContract.methods.latestRoundData().call();
+        console.log("Oracle data   :    ", latestData.answer.toString());
         const price = web3.utils.fromWei(latestData.answer.toString(), 'ether');
         return price;
     } catch (error) {
         console.error('Error fetching latest data:', error);
-        throw error; // Re-throw the error to be handled in the updateChart() function
+        throw error;
     }
 }
-let historicalData = [];
-async function loadChart() {
-    await fetchLatestData();
-    updateChart();
-  }
+
+// Function to update the latest values to the chart 
 async function updateChart() {
-    const latestPrice = await fetchLatestData();
-    historicalData.push(latestPrice);
+    try {
+        const latestPrice = await fetchLatestData();
+        historicalData.push(latestPrice);
+
+        // Update chart data
+        chartInstance.data.labels = historicalData.map((_, i) => i);
+        chartInstance.data.datasets[0].data = historicalData;
+        chartInstance.update();
+    } catch (error) {
+        console.error('Error updating chart:', error);
+        throw error;
+    }
+}
+
+// Function to Create the chart
+async function loadChart() {
 
     // Using Chart.js to visualize data
     const ctx = document.getElementById('myChart').getContext('2d');
-    new Chart(ctx, {
+    chartInstance = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: historicalData.map((_, i) => i), // X-axis labels
+            labels: historicalData.map((_, i) => i),
             datasets: [{
                 label: 'MATIC/WETH Price',
                 data: historicalData,
@@ -728,5 +747,9 @@ async function updateChart() {
             }]
         }
     });
+    //fixing a bunch of order of execution errors ; 
+    //including : Uncaught (in promise) TypeError: chartInstance is undefined
+    await updateChart(); 
+    // Set an interval to update the chart 
+    setInterval(updateChart, 180000);
 }
-//setInterval(updateChart, 180000);
